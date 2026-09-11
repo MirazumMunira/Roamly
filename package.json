@@ -1,0 +1,12 @@
+{
+  "name": "roamly",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "backend": "powershell -ExecutionPolicy Bypass -File ./run_backend.ps1",
+    "start": "powershell -ExecutionPolicy Bypass -File ./run.ps1"
+  }
+}
+
