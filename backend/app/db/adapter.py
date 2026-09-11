@@ -10,6 +10,18 @@ import psycopg
 from app.core.config import get_settings
 
 DB_PATH = Path(__file__).resolve().parent.parent.parent / "roamly.db"
+def get_db_path() -> Path:
+    if os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"):
+        return Path("/tmp/roamly.db")
+    local_path = Path(__file__).resolve().parent.parent.parent / "roamly.db"
+    try:
+        if not local_path.exists():
+            local_path.touch(exist_ok=True)
+        return local_path
+    except Exception:
+        return Path("/tmp/roamly.db")
+
+DB_PATH = get_db_path()
 
 def cosine_similarity(v1: list[float], v2: list[float]) -> float:
     if not v1 or not v2 or len(v1) != len(v2):

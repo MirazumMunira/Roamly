@@ -182,7 +182,7 @@ export default function App() {
       if (result.weather) setWeather(result.weather)
 
       if (foundPlaces.length > 0) {
-        // Automatically select best place and calculate direction like Google Maps!
+        // Automatically select the closest matching place and calculate its OSRM route.
         setStatus(`Found ${foundPlaces.length} places • Best match selected`)
         await selectPlace(foundPlaces[0], transportMode, updatedContext)
       } else {
